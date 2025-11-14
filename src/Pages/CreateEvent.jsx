@@ -23,7 +23,7 @@ const CreateEvent = () => {
 
     console.log("Created Event:", finalEvent);
 
-    fetch("http://localhost:3000/create-event", {
+    fetch("https://community-builders-bd-server.vercel.app/create-event", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -119,7 +119,7 @@ const CreateEvent = () => {
               onChange={(date) => setEventDate(date)}
               className="input input-bordered w-full"
               placeholderText="Select event date"
-              minDate={new Date()} 
+              minDate={new Date()}
               required
             />
           </div>

@@ -8,7 +8,9 @@ const ManageEvent = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/manage-event?email=${user?.email}`)
+    fetch(
+      `https://community-builders-bd-server.vercel.app/manage-event?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

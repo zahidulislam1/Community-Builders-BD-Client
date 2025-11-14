@@ -10,6 +10,8 @@ import EventDetails from "../Pages/EventDetails";
 import Loading from "../Component/Loading";
 import Error from "../Component/Error";
 import ManageEvent from "../Pages/ManageEvent";
+import JoinedEvent from "../Pages/JoinedEvent";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +27,8 @@ export const router = createBrowserRouter([
       {
         path: "/upcoming-event",
         Component: UpcomingEvent,
-        loader: () => fetch("http://localhost:3000/create-event"),
+        loader: () =>
+          fetch("https://community-builders-bd-server.vercel.app/create-event"),
       },
       {
         path: "/about",
@@ -45,13 +48,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/event-details/:id",
-        element: <EventDetails></EventDetails>,
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/create-event/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <EventDetails></EventDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/manage-event",
-        element: <ManageEvent></ManageEvent>,
+        element: (
+          <PrivateRoute>
+            <ManageEvent></ManageEvent>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/joined-event",
+        element: (
+          <PrivateRoute>
+            <JoinedEvent></JoinedEvent>
+          </PrivateRoute>
+        ),
       },
     ],
   },

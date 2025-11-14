@@ -25,6 +25,7 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         // console.log(user);
+        toast.success("Sign In successful");
         Navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
@@ -34,6 +35,7 @@ const Login = () => {
     handleGoogleSignin()
       .then((result) => {
         setUser(result);
+        Navigate(`${location.state ? location.state : "/"}`);
         toast.success("Sign In successful");
       })
       .catch((error) => {

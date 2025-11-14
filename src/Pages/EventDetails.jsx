@@ -1,15 +1,35 @@
-import React, { use, useState } from "react";
-import { useLoaderData } from "react-router";
+import React, { use, useEffect, useState } from "react";
+
 import { AuthContext } from "../Auth/AuthProvider";
 import toast from "react-hot-toast";
+import { useParams } from "react-router";
+import Loading from "../Component/Loading";
 
 const EventDetails = () => {
-  const event = useLoaderData();
+  const { id } = useParams();
   const { user } = use(AuthContext);
   const [joined, setJoined] = useState(false);
+  const [event, setEvent] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(
+      `https://community-builders-bd-server.vercel.app/create-event/${id}`,
+      {
+        headers: {
+          authorization: `Bearer ${user?.accessToken}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setEvent(data);
+        setLoading(false);
+      });
+  }, [id, user]);
 
   const handleJoinEvent = () => {
-    fetch("http://localhost:3000/joined-event", {
+    fetch("https://community-builders-bd-server.vercel.app/joined-event", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,6 +46,9 @@ const EventDetails = () => {
       });
     setJoined(true);
   };
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <section className="min-h-screen bg-base-200 px-6 py-12 flex justify-center">

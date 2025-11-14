@@ -11,7 +11,10 @@ const UpcomingEvent = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {data.map((event) => (
-          <div className="card bg-base-100 shadow-xl rounded-2xl border cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl animate__animated animate__fadeInUp">
+          <div
+            key={event._id}
+            className="card bg-base-100 shadow-xl rounded-2xl border cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl animate__animated animate__fadeInUp"
+          >
             {/* Thumbnail */}
             <figure className="overflow-hidden rounded-t-2xl">
               <img
