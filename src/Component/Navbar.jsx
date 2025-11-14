@@ -137,7 +137,7 @@ const Navbar = () => {
               </li>
 
               <li>
-                <NavLink to="/Create-event">Create Event</NavLink>
+                <NavLink to="/create-event">Create Event</NavLink>
               </li>
 
               <li>

@@ -61,7 +61,7 @@ const Register = () => {
       });
   };
   return (
-    <section className="min-h-screen flex items-center justify-center bg-base-200 px-4">
+    <section className="min-h-screen flex items-center justify-center bg-base-200 px-4 py-12">
       <div className="card w-full max-w-md bg-base-100 shadow-xl p-8">
         <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
 
