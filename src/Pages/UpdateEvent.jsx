@@ -36,7 +36,6 @@ const UpdateEvent = () => {
       location: e.target.location.value,
       eventDate: e.target.eventDate.value,
       created_by: user?.email,
-      update_by: user?.email,
     };
     fetch(
       `https://community-builders-bd-server.vercel.app/create-event/${event._id}`,
@@ -138,6 +137,7 @@ const UpdateEvent = () => {
           <div>
             <label className="block font-medium mb-1">Event Date</label>
             <input
+              name="eventDate"
               defaultValue={event.eventDate}
               className="input input-bordered w-full"
               type="text"
