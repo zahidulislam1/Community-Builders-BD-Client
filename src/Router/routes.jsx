@@ -12,6 +12,7 @@ import Error from "../Component/Error";
 import ManageEvent from "../Pages/ManageEvent";
 import JoinedEvent from "../Pages/JoinedEvent";
 import PrivateRoute from "./PrivateRoute";
+import UpdateEvent from "../Pages/UpdateEvent";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +68,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <JoinedEvent></JoinedEvent>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-event/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateEvent></UpdateEvent>
           </PrivateRoute>
         ),
       },

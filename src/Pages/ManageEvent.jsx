@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Auth/AuthProvider";
 import Loading from "../Component/Loading";
+import { NavLink } from "react-router";
 
 const ManageEvent = () => {
   const { user } = use(AuthContext);
@@ -27,11 +28,6 @@ const ManageEvent = () => {
     }
   };
 
-  // Update event (example: just alert, you can replace with a modal or form)
-  const handleUpdate = (event) => {
-    alert(`Update Event: ${event.title}`);
-    // Here you can open a modal or navigate to a form pre-filled with event data
-  };
   if (loading) {
     return <Loading></Loading>;
   }
@@ -68,12 +64,12 @@ const ManageEvent = () => {
             </div>
 
             <div className="flex gap-3 mt-4">
-              <button
-                onClick={() => handleUpdate(event)}
+              <NavLink
+                to={`/update-event/${event._id}`}
                 className="btn btn-sm btn-outline text-[#3bd671] rounded-full flex-1"
               >
                 Update Event
-              </button>
+              </NavLink>
               <button
                 onClick={() => handleDelete(index)}
                 className="btn btn-sm btn-outline btn-error rounded-full flex-1"

@@ -40,6 +40,7 @@ const Register = () => {
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photo });
             toast.success("Sign Up successful");
+            e.target.reset();
           })
           .catch((error) => {
             setError(error.message);

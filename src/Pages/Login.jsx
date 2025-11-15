@@ -26,6 +26,7 @@ const Login = () => {
         const user = res.user;
         // console.log(user);
         toast.success("Sign In successful");
+        e.target.reset();
         Navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
