@@ -1,12 +1,12 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Auth/AuthProvider";
 import Loading from "../Component/Loading";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import Swal from "sweetalert2";
 
 const ManageEvent = () => {
   const { user } = use(AuthContext);
-  const navigate = useNavigate();
+
   const [eventList, setEventList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -44,8 +44,7 @@ const ManageEvent = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-            navigate("/upcoming-event");
+            // console.log(data);
 
             Swal.fire({
               title: "Deleted!",
