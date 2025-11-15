@@ -1,10 +1,12 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Auth/AuthProvider";
 import Loading from "../Component/Loading";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const ManageEvent = () => {
   const { user } = use(AuthContext);
+  const navigate = useNavigate();
   const [eventList, setEventList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,12 +22,42 @@ const ManageEvent = () => {
       });
   }, [user]);
   // Delete event
-  const handleDelete = (index) => {
-    if (window.confirm("Are you sure you want to delete this event?")) {
-      const updatedEvents = [...eventList];
-      updatedEvents.splice(index, 1);
-      setEventList(updatedEvents);
-    }
+  const handleDelete = (event) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `https://community-builders-bd-server.vercel.app/create-event/${event._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            navigate("/upcoming-event");
+
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
   };
 
   if (loading) {
@@ -71,7 +103,7 @@ const ManageEvent = () => {
                 Update Event
               </NavLink>
               <button
-                onClick={() => handleDelete(index)}
+                onClick={() => handleDelete(event)}
                 className="btn btn-sm btn-outline btn-error rounded-full flex-1"
               >
                 Delete
